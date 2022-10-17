@@ -9,8 +9,8 @@ function PercentageCut(percent, value)
 end
 
 
-RegisterNetEvent("metaverse_blanchisseur:server:checkforbills")
-AddEventHandler("metaverse_blanchisseur:server:checkforbills", function()
+RegisterNetEvent("metaverse_receleur:server:checkforbills")
+AddEventHandler("metaverse_receleur:server:checkforbills", function()
     local ServerDataWorth = 0
     local amount = 0
     local src = source
@@ -22,22 +22,25 @@ AddEventHandler("metaverse_blanchisseur:server:checkforbills", function()
                 ServerDataWorth = ServerDataWorth + (1000 * data.amount)
                 amount = amount + data.amount
                 Player.Functions.RemoveItem('goldbar', data.amount, slot)
+            elseif data.name == 'diamond' then
+                ServerDataWorth = ServerDataWorth + (1000 * data.amount)
+                amount = amount + data.amount
+                Player.Functions.RemoveItem('diamond', data.amount, slot)
             end
         end
     end
-
     
         if ServerDataWorth > 0 and amount > 0 then
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['goldbar'], "remove", amount)
-            TriggerClientEvent('metaverse_blanchisseur:client:exchangebills', src, ServerDataWorth)
+            TriggerClientEvent('metaverse_receleur:client:exchangebills', src, ServerDataWorth)
             TriggerClientEvent('QBCore:Notify', src, 'Attends. je reprends tes '..amount..' lingots.')
         end
 
 end)
 
 
-RegisterNetEvent("metaverse_blanchisseur:server:returncleancash")
-AddEventHandler("metaverse_blanchisseur:server:returncleancash", function(ServerDataWorth)
+RegisterNetEvent("metaverse_receleur:server:returncleancash")
+AddEventHandler("metaverse_receleur:server:returncleancash", function(ServerDataWorth)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local finalworth = ServerDataWorth

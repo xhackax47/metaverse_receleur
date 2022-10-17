@@ -65,7 +65,7 @@ function DirtyDan()
             options = {
                 {
                     type = "server",
-                    event = "metaverse_blanchisseur:server:checkforbills",
+                    event = "metaverse_receleur:server:checkforbills",
                     icon = "fa-solid fa-sack-dollar",
                     label = "Echanger ses lingots",
                     item = "goldbar",
@@ -77,18 +77,18 @@ function DirtyDan()
 end
 
 
-RegisterNetEvent('metaverse_blanchisseur:client:exchangebills')
-AddEventHandler('metaverse_blanchisseur:client:exchangebills', function(ServerDataWorth)
+RegisterNetEvent('metaverse_receleur:client:exchangebills')
+AddEventHandler('metaverse_receleur:client:exchangebills', function(ServerDataWorth)
     local ped = PlayerPedId()
     TriggerEvent('animations:client:EmoteCommandStart', {"windowshop"})
-    QBCore.Functions.Progressbar("cleanbills", "Echange de lingots en cours..", 10000, false, false, {
+    QBCore.Functions.Progressbar("cleanlingots", "Echange de lingots en cours..", 10000, false, false, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        TriggerServerEvent("metaverse_blanchisseur:server:returncleancash", ServerDataWorth)
+        TriggerServerEvent("metaverse_receleur:server:returncleancash", ServerDataWorth)
     end)
 end)
 
